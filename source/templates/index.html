@@ -2,19 +2,76 @@
 <html lang="en">
 <head>
     <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 </head>
 <body>
-    <form action="/api/students" method='POST'>
+    <div style="text-align: right; padding: 20px;">
+        <a href="#student-popup" class="open-btn">+ New Student</a>
+    </div>
 
-        <input type="text" name="name" placeholder="Enter name">
-        <input type="number" name="age" placeholder="Enter age">
-        <input type="text" name="Class" placeholder="Enter class">
-        <input type="text" name="gender" placeholder="Enter gender">
-        <input type="number" name="math" placeholder="Enter maths marks">
-        <input type="number" name="history" placeholder="Enter history marks">
-        <input type="number" name="physics" placeholder="Enter physics marks">
+    <div id = "student-popup" class = "overlay">
+        <div class = "form-card">
+            <a href="#" class = "close-btn">&times;</a>
+            <h2>New Student</h2>
+            <form action="/api/students" method='POST'>
 
-        <button type="submit">send</button>
-    </form>
+            <div class="input-group">
+                <input type="text" name="name" placeholder="Enter name">
+                <input type="number" name="age" placeholder="Enter age">
+                <input type="text" name="Class" placeholder="Enter class">
+                <input type="text" name="gender" placeholder="Enter gender">
+            </div>
+            
+            <div class="input-group">
+                <input type="number" name="math" placeholder="Math marks">
+                <input type="number" name="history" placeholder="History marks">
+                <input type="number" name="physics" placeholder="Physics marks">
+            </div>
+
+            <div class = "button-container">
+                <button type="submit">Add Student</button>
+            </div>
+            </form>
+        </div>
+    </div>
+
+
+    <p>Debug: {{ students }}</p>
+
+    <!--this is for the home page-->
+    <div class = "table-container">
+        <h2>Student list</h2>
+        <table class="student-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Class</th>
+                <th>Math</th>
+                <th>History</th>
+                <th>Physics</th>
+                <th>Avg</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.age }}</td>
+                <td>{{ student.Class }}</td>
+                <td>{{ student.grades.math }}</td>
+                <td>{{ student.grades.history }}</td>
+                <td>{{ student.grades.physics }}</td>
+                <td><strong>{{ "%.2f"|format(student.avg) }}</strong></td>
+                <td>
+                    <a href="/edit/{{ student.id }}" class="edit-link">Edit</a>
+                    <a href="/delete/{{ student.id }}" class="delete-link">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
 </body>
 </html>
