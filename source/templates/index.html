@@ -1,77 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Document</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
-</head>
-<body>
-    <div style="text-align: right; padding: 20px;">
-        <a href="#student-popup" class="open-btn">+ New Student</a>
-    </div>
+{% extends "base.html" %}
 
-    <div id = "student-popup" class = "overlay">
-        <div class = "form-card">
-            <a href="#" class = "close-btn">&times;</a>
-            <h2>New Student</h2>
-            <form action="/api/students" method='POST'>
+{% block content %}
+<h2>Student Directory</h2>
 
-            <div class="input-group">
-                <input type="text" name="name" placeholder="Enter name">
-                <input type="number" name="age" placeholder="Enter age">
-                <input type="text" name="Class" placeholder="Enter class">
-                <input type="text" name="gender" placeholder="Enter gender">
-            </div>
-            
-            <div class="input-group">
-                <input type="number" name="math" placeholder="Math marks">
-                <input type="number" name="history" placeholder="History marks">
-                <input type="number" name="physics" placeholder="Physics marks">
-            </div>
+<p>
+    <a href="{{ url_for('add_student_page') }}">[ + Add New Student ]</a>
+</p>
 
-            <div class = "button-container">
-                <button type="submit">Add Student</button>
-            </div>
-            </form>
-        </div>
-    </div>
-
-
-    <p>Debug: {{ students }}</p>
-
-    <!--this is for the home page-->
-    <div class = "table-container">
-        <h2>Student list</h2>
-        <table class="student-table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Class</th>
-                <th>Math</th>
-                <th>History</th>
-                <th>Physics</th>
-                <th>Avg</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for student in students %}
-            <tr>
-                <td>{{ student.name }}</td>
-                <td>{{ student.age }}</td>
-                <td>{{ student.Class }}</td>
-                <td>{{ student.grades.math }}</td>
-                <td>{{ student.grades.history }}</td>
-                <td>{{ student.grades.physics }}</td>
-                <td><strong>{{ "%.2f"|format(student.avg) }}</strong></td>
-                <td>
-                    <a href="/edit/{{ student.id }}" class="edit-link">Edit</a>
-                    <a href="/delete/{{ student.id }}" class="delete-link">Delete</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    </div>
-</body>
-</html>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Class</th>
+            <th>Gender</th>
+            <th>Average %</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student in students %}
+        <tr>
+            <td>
+                <a href="{{ url_for('student_details', student_id=student.student_id) }}">
+                    {{ student.name }}
+                </a>
+            </td>
+            <td>{{ student.student_class }}</td>
+            <td>{{ student.gender }}</td>
+            <td>
+                {% if student.grades %}
+                {{ "%.1f"|format(student.calculate_average()) }}%
+                {% else %}
+                N/A
+                {% endif %}
+            </td>
+            <td>
+                <a href="{{ url_for('edit_student', student_id=student.student_id) }}">Edit</a> |
+                <form action="{{ url_for('delete_student', student_id=student.student_id) }}" method="POST"
+                    style="display:inline; border:none; padding:0; background:none;">
+                    <input type="submit" value="Delete" onclick="return confirm('Are you sure?');"
+                        style="cursor:pointer; background:none; border:none; text-decoration:underline; color:#0000EE; padding:0; margin:0; font-family:inherit;">
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="5" style="text-align: center;">No students found in database.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

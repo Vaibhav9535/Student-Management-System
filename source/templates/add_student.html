@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Add New Student</h2>
+
+<form method="POST" action="{{ url_for('add_student_page') }}">
+    <p>
+        <label>Name:</label><br>
+        <input type="text" name="name" required>
+    </p>
+    <p>
+        <label>Age:</label><br>
+        <input type="number" name="age" required min="5" max="100">
+    </p>
+    <p>
+        <label>Class:</label><br>
+        <input type="text" name="student_class" required>
+    </p>
+    <p>
+        <label>Gender:</label><br>
+        <select name="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+    </p>
+
+    <hr>
+    <h3>Grades</h3>
+    <p>
+        <label>Math:</label> <input type="number" name="math" value="0" min="0" max="100">
+    </p>
+    <p>
+        <label>Science:</label> <input type="number" name="science" value="0" min="0" max="100">
+    </p>
+    <p>
+        <label>History:</label> <input type="number" name="history" value="0" min="0" max="100">
+    </p>
+
+    <p>
+        <input type="submit" value="Save Student">
+        or <a href="{{ url_for('index') }}">Cancel</a>
+    </p>
+</form>
+{% endblock %}

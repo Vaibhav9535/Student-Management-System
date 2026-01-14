@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>
+    <a href="{{ url_for('index') }}">&lt;&lt; Back to Directory</a>
+</p>
+
+<h2>Student Details: {{ student.name }}</h2>
+
+<ul>
+    <li><strong>Class:</strong> {{ student.student_class }}</li>
+    <li><strong>Gender:</strong> {{ student.gender }}</li>
+    <li><strong>Age:</strong> {{ student.age }}</li>
+</ul>
+
+<p>
+    <a href="{{ url_for('edit_student', student_id=student.student_id) }}">[ Edit Profile ]</a>
+</p>
+
+<h3>Academic Record</h3>
+
+<table style="width: 50%;">
+    <thead>
+        <tr>
+            <th>Subject</th>
+            <th>Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for subject, score in student.grades.items() %}
+        <tr>
+            <td>{{ subject }}</td>
+            <td>{{ score }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Overall Average</th>
+            <th>{{ "%.1f"|format(student.calculate_average()) }}%</th>
+        </tr>
+    </tfoot>
+</table>
+{% endblock %}
