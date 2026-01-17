@@ -1,96 +1,88 @@
-.form-card {
+body {
+    font-family: "Times New Roman", Times, serif;
     background-color: #ffffff;
-    padding: 30px;
+    color: #000000;
     margin: 20px auto;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 12px;
-    /* This shadow creates the 'block' effect */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    line-height: 1.6;
 }
 
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7); /* Dims the background */
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1000;
+h1,
+h2,
+h3 {
+    border-bottom: 2px solid #000;
+    padding-bottom: 5px;
 }
 
-.overlay:target {
-    visibility: visible;
-    opacity: 1;
+a {
+    color: #0000EE;
+    text-decoration: underline;
 }
 
-.open-btn {
-    background-color: #28a745;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
+a:visited {
+    color: #551A8B;
 }
 
-.close-btn {
-    float: right;
-    font-size: 24px;
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-}
-
-.form-card input {
-    width: calc(100% - 20px); /* Full width minus padding */
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 6px; /* Smooth edges */
-    font-size: 16px;
-    display: block; /* Makes each input take its own line */
-}
-
-.button-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 20px;
-}
-/* 3. The Button */
-.form-card button {
-    width: 50%;
-    padding: 12px;
-    margin: 20px auto 0;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.form-card button:hover {
-    background-color: #0056b3;
-}
-
-.student-table td {
-    padding: 10px 5px; /* Less horizontal padding */
-    font-size: 14px;   /* Slightly smaller font for data */
-    text-align: center; /* Center numbers for easier reading */
-}
-
-.student-table th {
+nav {
+    background-color: #eee;
+    padding: 10px;
+    border: 1px solid #000;
+    margin-bottom: 20px;
     text-align: center;
 }
 
-/* Keep the name left-aligned so it's easy to read */
-.student-table td:first-child, 
-.student-table th:first-child {
+nav a {
+    margin: 0 15px;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th,
+td {
+    border: 1px solid #000;
+    padding: 8px;
     text-align: left;
-    padding-left: 15px;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+.button {
+    border: 1px solid #000;
+    background-color: #ddd;
+    color: #000;
+    padding: 5px 10px;
+    text-decoration: none;
+    font-family: inherit;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.button:hover {
+    background-color: #ccc;
+}
+
+input,
+select {
+    padding: 5px;
+    margin-bottom: 10px;
+    font-family: inherit;
+}
+
+form {
+    border: 1px solid #000;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
 }

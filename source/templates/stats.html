@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Class Statistics</h2>
+
+<ul>
+    <li><strong>Total Students:</strong> {{ total_students }}</li>
+    <li><strong>Class Average:</strong> {{ "%.1f"|format(class_average) }}%</li>
+    <li><strong>Top Student:</strong> {{ top_student }}</li>
+</ul>
+
+<h3>Subject Performance</h3>
+
+<table style="width: 50%;">
+    <thead>
+        <tr>
+            <th>Subject</th>
+            <th>Average Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for subject, avg in subject_averages.items() %}
+        <tr>
+            <td>{{ subject }}</td>
+            <td>{{ "%.1f"|format(avg) }}%</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
