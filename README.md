@@ -23,7 +23,7 @@ A simple web-based Student Management System built with Flask.
     ```bash
     python3 app.py
     ```
-4.  **Access**: Open your browser and navigate to `http://127.0.0.1:8000`.
+4.  **Access**: Open your browser and navigate to `http://127.0.0.1:5000`.
 
 ## Project Structure
 
