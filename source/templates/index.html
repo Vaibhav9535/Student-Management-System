@@ -7,6 +7,19 @@
     <a href="{{ url_for('add_student_page') }}">[ + Add New Student ]</a>
 </p>
 
+<!-- search bar -->
+<div style="margin-bottom: 20px;">
+    <form method="GET" action="{{ url_for('index') }}" style="display: flex; gap: 10px;">
+        <input type="text" name="q" placeholder="Search by Name or Class..." value="{{ query if query }}"
+            style="padding: 5px; flex-grow: 1; max-width: 300px;">
+        <button type="submit" style="padding: 5px 10px;">Search</button>
+        {% if query %}
+        <a href="{{ url_for('index') }}"
+            style="padding: 5px 10px; text-decoration: none; border: 1px solid #ccc; background-color: #f0f0f0; color: black;">Clear</a>
+        {% endif %}
+    </form>
+</div>
+
 <table>
     <thead>
         <tr>

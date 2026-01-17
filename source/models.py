@@ -36,6 +36,16 @@ class StudentManager:
         return None
 
 
+    def search_students(self, query: str) -> List[Student]:
+        if not query:
+            return self.students
+        
+        query = query.lower()
+        return [
+            s for s in self.students 
+            if query in s.name.lower() or query in s.student_class.lower()
+        ]
+
 
     def update_student_details(self, student_id: str, name: str, age: int, student_class: str, gender: str, grades: Dict[str, float]) -> Optional[Student]:
         student = self.get_student_by_id(student_id)

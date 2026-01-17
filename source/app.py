@@ -25,8 +25,12 @@ manager.add_student("Kabir Malhotra", 21, "10A", "Male", {"Math": 70, "Science":
 
 @app.route('/')
 def index():
-    students = manager.get_all_students()
-    return render_template('index.html', students=students)
+    query = request.args.get('q')
+    if query:
+        students = manager.search_students(query)
+    else:
+        students = manager.get_all_students()
+    return render_template('index.html', students=students, query=query)
 
 @app.route('/stats')
 def stats():
@@ -115,4 +119,4 @@ def delete_student(student_id):
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8000)
+    app.run(debug=True, port=5000)
