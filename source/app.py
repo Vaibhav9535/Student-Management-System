@@ -72,26 +72,23 @@ def add_student_page():
             manager.add_student(name, age, student_class, gender, grades)
             return redirect(url_for('index'))
         except ValueError:
-            return "Invalid input", 400
+            return "Invalid input"
             
     return render_template('add_student.html')
-
-
-
 
 
 @app.route('/student/<student_id>')
 def student_details(student_id):
     student = manager.get_student_by_id(student_id)
     if not student:
-        return "Student not found", 404
+        return "Student not found"
     return render_template('student_details.html', student=student)
 
 @app.route('/edit/<student_id>', methods=['GET', 'POST'])
 def edit_student(student_id):
     student = manager.get_student_by_id(student_id)
     if not student:
-        return "Student not found", 404
+        return "Student not found"
         
     if request.method == 'POST':
         try:
@@ -109,7 +106,7 @@ def edit_student(student_id):
             manager.update_student_details(student_id, name, age, student_class, gender, grades)
             return redirect(url_for('index'))
         except ValueError:
-            return "Invalid input", 400
+            return "Invalid input"
 
     return render_template('edit_student.html', student=student)
 
